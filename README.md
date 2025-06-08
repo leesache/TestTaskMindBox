@@ -2,6 +2,45 @@
 
 A Python package for calculating areas of different geometric shapes. The package is designed to be easily extensible for adding new shapes.
 
+## Runtime Polymorphism
+
+The package implements runtime polymorphism, allowing you to work with shapes without knowing their specific type at compile-time. This is achieved through the base `Shape` class and inheritance.
+
+Example of runtime polymorphism:
+
+```python
+from area_calculator.shapes.triangle import Triangle
+from area_calculator.shapes.circle import Circle
+
+def calculate_total_area(shapes):
+    """
+    Calculate total area of multiple shapes without knowing their specific types.
+    Works with any shape that inherits from Shape class.
+    """
+    return sum(shape.area() for shape in shapes)
+
+# Create different shapes
+shapes = [
+    Triangle(3, 4, 5),  # Right triangle
+    Circle(5),          # Circle
+    Triangle(5, 5, 5),  # Equilateral triangle
+]
+
+# Calculate total area without knowing specific types
+total_area = calculate_total_area(shapes)
+print(f"Total area: {total_area}")
+
+# You can even add new shapes later without modifying this code
+shapes.append(Circle(10))
+new_total = calculate_total_area(shapes)
+```
+
+This demonstrates the key principles:
+1. The `calculate_total_area` function works with any shape
+2. We don't need to know the specific type of each shape
+3. New shapes can be added without modifying existing code
+4. The area calculation is determined at runtime, not compile-time
+
 ## Installation
 
 ```bash
